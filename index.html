@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
+		<title>20 Second Click Challenge</title>
+	</head>
+	<body>
+		<nav>
+            <h1 id = "words"><span id = "time"></span>s left</h1>
+        </nav>
+        <br>
+        <div id = "begin">
+            <h1><span id = "clicks"></span> CLICKS</h1>
+            <button id = "start" onclick = "start()">CLICK TO START</button>
+        </div>
+        <div id = "end">
+            <button id = "endb" onclick = "start()">PLAY AGAIN</button>
+        </div>
+    <style>
+      * {
+    margin:0;
+    padding:0;
+    color:white;
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+	background-color:black;
+    text-align:center;
+}
+
+nav {
+    width:150px;
+    height:50px;
+    margin-left:20px;
+    margin-top:20px;
+    border-radius:5px;
+    background-color:#36454f;
+}
+
+#words {
+    margin-left:10px;
+    margin-top:10px;
+    float:left;
+}
+
+#start, #endb {
+    width:150px;
+    height:50px;
+    margin-top:50px;
+    background-color:transparent;
+    border:white solid 1px;
+    border-radius:5px;
+}
+
+#endb {
+    opacity:0;
+    pointer-events:none;
+    margin-top:-400px;
+}
+
+button {
+    cursor:pointer;
+    transition:all 0.5s;
+}
+
+#start:hover {
+    border:white solid 2px;
+}
+
+#start:focus {
+    display:none;
+}
+
+#endb:hover {
+    border:white solid 2px;
+}
+
+#endb:focus {
+    display:none;
+}
+    </style>
+    <script>
+      var timeStart = 20;
+var clicksStart = 0;
+var canClick = false;
+
+document.getElementById ("time").innerHTML = timeStart;
+document.getElementById ("clicks").innerHTML = clicksStart;
+function start () {
+    // Variable
+    canClick = true;
+
+    // Removes and unfocuses start button
+    document.getElementById ("start").style.opacity = "0.0";
+    document.getElementById ("start").style.pointerEvents = "none";
+
+    // ------------------- //
+    // Timer
+    document.getElementById ("time").innerHTML = timeStart--;
+    setInterval(function () {
+        document.getElementById ("time").innerHTML = timeStart--;
+        if (timeStart == -1) {
+            canClick = false;
+            timeStart = 0;
+            document.getElementById ("endb").style.opacity = "1.0";
+            document.getElementById ("endb").style.pointerEvents = "all";
+        }
+    }, 1000);
+
+    // ------------------- //
+}
+
+function end () {
+    location.reload();
+}
+
+// Adds to click score.
+window.onkeyup = function(event) {
+    if (canClick === true) {
+        if (event.which == 32) {
+            document.getElementById ("clicks").innerHTML = clicksStart++;
+        }
+    }
+}
+    </script>
+	</body>
+</html>
