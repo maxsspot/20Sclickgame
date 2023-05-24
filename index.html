@@ -93,6 +93,9 @@ function start () {
     // Removes and unfocuses start button
     document.getElementById ("start").style.opacity = "0.0";
     document.getElementById ("start").style.pointerEvents = "none";
+	setTimeout(function(){
+	document.getElementById ("start").style.display = "none";
+	}, 600);
 
     // ------------------- //
     // Timer
